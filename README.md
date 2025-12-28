@@ -3,6 +3,7 @@
 ## Common tools 
 - iTerm
   - homebrew
+  - ohmyzsh
 - Raycast
 - Obsidian 
 - Excalidraw
