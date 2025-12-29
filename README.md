@@ -21,3 +21,5 @@ Note to self - don't get too excited about some new shiny tool in the market. St
 - neovim
 - gemini-cli
 - claude-code-cli
+- ffmpeg  
+- ripgrep, fzf, fc

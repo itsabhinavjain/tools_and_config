@@ -6,5 +6,6 @@
 - Snippets 
 	- Date, Address, Gmeet etc 
 - Window Management 
-- Shortcuts 
+- Shortcuts (Keybindings)
 	- Window Management 
+	- Specific Snippets 

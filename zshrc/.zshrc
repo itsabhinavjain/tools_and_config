@@ -315,7 +315,7 @@ compdef _files ff
 
 # Function to fuzzy search and preview file contents with highlighted matches
 # Usage: fff <root_dir> <search_text>
-fff() {
+fg() {
   # Ensure the root directory and search text are provided
   if [[ -z "$1" ]] || [[ -z "$2" ]]; then
     echo "Usage: fff <root_dir> <search_text>"
@@ -345,7 +345,7 @@ fff() {
   )" || return
 }
 # Enable autocompletion for the fff function (only for directory paths)
-compdef _files fff
+compdef _files fg
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
