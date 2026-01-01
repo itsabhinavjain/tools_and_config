@@ -166,34 +166,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
-##### ZSH HOOKS #####
-
-# # Define chpwd function to handle Conda environment activation
-# chpwd() {
-#     # Check if .conda_config exists in the current directory
-#     if [ -d "$PWD/venv" ]; then
-#         # Prompt user to activate the Conda virtual environment
-#         echo -n "Found a 'venv' folder. Do you want to activate the virtual environment? ([y]/n) "
-#         read answer
-#         case "$answer" in
-#             y|Y|yes|YES|"")
-#                 echo "Activating the virtual environment."
-#                 export CONDACONFIGDIR=$PWD
-#                 conda activate "$PWD/venv"
-#                 ;;
-#             *)
-#                 echo "Activation cancelled."
-#                 ;;
-#         esac
-#     # Check if CONDACONFIGDIR is set and deactivate Conda environment if necessary
-#     elif [ -n "$CONDACONFIGDIR" ] && [[ "$PWD" != *"$CONDACONFIGDIR"* ]]; then
-#         echo "Deactivating the virtual environment."
-#         unset CONDACONFIGDIR
-#         conda deactivate
-#     fi
-# }
-
 # Initialize CONDACONFIGDIR if a Conda environment is already activated
 if command -v conda >/dev/null 2>&1 && [ -n "$CONDA_DEFAULT_ENV" ]; then
     CONDACONFIGDIR=$(conda info --base)/envs/$(basename "$CONDA_DEFAULT_ENV")
@@ -201,36 +173,30 @@ fi
 
 
 ##### USER PREFERENCES #####
-
 export CODE_SANDBOX="/Users/abhinavjain/Documents/1-Code-Sandbox"
 export PRODUCTIVITY_SCRIPTS_DIR="/Users/abhinavjain/Documents/1-Productivity-Scripts"
+
 export CURRENT_TIMESTAMP=$(date +"%Y-%m-%d_%H-%M") # Generate timestamp
 
-## Favorite folders
+#### Other exports ### 
+export DEFAULT_DATABASE=neo4j # Needed for Graphiti. See how to initiatise with a database name later in python 
+
+## Aliases 
+## For common folders, commands, servers, shorcuts, scripts etc 
+
 alias ss="cd ${CODE_SANDBOX}"
-alias c="clear"
+alias nn="nvim ."
 alias clam="sudo pmset disablesleep 1; sleep 5; sudo pmset disablesleep 0"
 alias debugagent='uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev'
 
-## Favorite servers
-
-## Common misspellings
-
-## Common shortcuts
 alias ll="ls -ahl"
 alias ls="ls -1"
 
-
-# rmd () {
-#   pandoc $1 | lynx -stdin
-#   # To view markdown files on the terminal 
-# }
-
 alias kk="glow ${PRODUCTIVITY_SCRIPTS_DIR}/00-developer-productivity/00_common_commands.md" # Showcase the most commonly used commands
-# alias kk="rmd ${PRODUCTIVITY_SCRIPTS_DIR}/00-developer-productivity/00_common_commands.md" # Showcase the most commonly used commands
 alias kkk="subl ${PRODUCTIVITY_SCRIPTS_DIR}/00-developer-productivity/00_common_commands.md" # Edit the most commonly used commands
 
 # # Function to call custom productivity scripts
+# mm 
 mm() {
   if [[ -z "$PRODUCTIVITY_SCRIPTS_DIR" ]]; then
     echo "PRODUCTIVITY_SCRIPTS_DIR environment variable is not set."
@@ -241,6 +207,7 @@ mm() {
     return 1
   fi
 
+  # Change the directory to the PRODUCTIVITY_SCRIPTS_DIR folder. This is where all the scripts are run from. 
   cd "$PRODUCTIVITY_SCRIPTS_DIR" || { echo "Failed to change directory to $PRODUCTIVITY_SCRIPTS_DIR"; return 1; }
   
   # Search for the various scripts `.sh` and `.zsh` scripts in the folder 
@@ -262,12 +229,15 @@ mm() {
       chmod +x "$script"
       echo "$script"
       ./"$script"
+      cd - 
       ;;
     *)
       echo "Script execution aborted."
+      cd - 
       ;;
   esac
 }
+
 
 # # Function to fuzzy search and preview directories
 # dd
@@ -349,6 +319,7 @@ fg() {
 # Enable autocompletion for the fg function (only for directory paths)
 compdef _files fg
 
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pnpm
@@ -404,6 +375,3 @@ export PATH="/Users/abhinavjain/.antigravity/antigravity/bin:$PATH"
 
 # Amp CLI
 export PATH="/Users/abhinavjain/.amp/bin:$PATH"
-
-# Needed for Graphiti. See how to initiatise with a database name later in python 
-export DEFAULT_DATABASE=neo4j 
