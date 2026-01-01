@@ -243,10 +243,11 @@ mm() {
 
   cd "$PRODUCTIVITY_SCRIPTS_DIR" || { echo "Failed to change directory to $PRODUCTIVITY_SCRIPTS_DIR"; return 1; }
   
-  # script=$(find . -type f -name "*.sh" | fzf)
+  # Search for the various scripts `.sh` and `.zsh` scripts in the folder 
   script=$(find . -type f \( -name "*.sh" -o -name "*.zsh" \) | fzf)
   
   if [[ -z "$script" ]]; then
+    cd - 
     echo "No script selected."
     return 1
   fi
