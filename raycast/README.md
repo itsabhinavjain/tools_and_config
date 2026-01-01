@@ -9,3 +9,13 @@
 - Shortcuts (Keybindings)
 	- Window Management 
 	- Specific Snippets 
+
+
+## What to 
+- Export Snippets 
+- Export Quicklinks 
+- Export Settings and Data 
+	- Settings and hotkeys
+	- Extensions
+	- (And many other stuff)
+
