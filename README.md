@@ -6,6 +6,7 @@ This is an opinionated list of tools that I use and I have gotten used to. This 
   - homebrew
   - ohmyzsh
   - tmux
+  - (Look at tools_terminal)
 - Raycast : Shortcuts and keybindings etc
 - Obsidian : Markdown based notes and journalling 
 - Excalidraw : Visual diagrams 
@@ -14,13 +15,3 @@ This is an opinionated list of tools that I use and I have gotten used to. This 
   - Sublime Text (Quick notes) 
   - Antigravity
   - Docker
-
-## Terminal tools 
-- zsh
-- neovim
-- yazi
-- gemini-cli
-- claude-code-cli
-- open-code-cli
-- ffmpeg  
-- ripgrep, fzf, fc

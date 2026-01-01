@@ -1,0 +1,8 @@
+- zsh
+- neovim
+- yazi
+- gemini-cli
+- claude-code-cli
+- open-code-cli
+- ffmpeg  
+- ripgrep, fzf, fc

@@ -173,27 +173,31 @@ fi
 
 
 ##### USER PREFERENCES #####
-export CODE_SANDBOX="/Users/abhinavjain/Documents/1-Code-Sandbox"
+export WORKSPACE_DIR="/Users/abhinavjain/Documents/0-Workspaces"
 export PRODUCTIVITY_SCRIPTS_DIR="/Users/abhinavjain/Documents/1-Productivity-Scripts"
+export SECRETS_DIR="/Users/abhinavjain/Documents/0-Workspaces/env_and_dotfiles_and_secrets"
+export LOCAL_SECRETS_FILE=".env.local"
 
 export CURRENT_TIMESTAMP=$(date +"%Y-%m-%d_%H-%M") # Generate timestamp
-
-#### Other exports ### 
-export DEFAULT_DATABASE=neo4j # Needed for Graphiti. See how to initiatise with a database name later in python 
 
 ## Aliases 
 ## For common folders, commands, servers, shorcuts, scripts etc 
 
-alias ss="cd ${CODE_SANDBOX}"
+alias ss="cd ${WORKSPACE_DIR}"
 alias nn="nvim ."
+ee() {
+  source "${SECRETS_DIR}/${LOCAL_SECRETS_FILE}"
+  echo "LOCAL_SCRIPT_IMPORTED=$LOCAL_SCRIPT_IMPORTED"
+}
+
 alias clam="sudo pmset disablesleep 1; sleep 5; sudo pmset disablesleep 0"
 alias debugagent='uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev'
 
 alias ll="ls -ahl"
 alias ls="ls -1"
 
-alias kk="glow ${PRODUCTIVITY_SCRIPTS_DIR}/00-developer-productivity/00_common_commands.md" # Showcase the most commonly used commands
-alias kkk="subl ${PRODUCTIVITY_SCRIPTS_DIR}/00-developer-productivity/00_common_commands.md" # Edit the most commonly used commands
+alias kk="glow ${PRODUCTIVITY_SCRIPTS_DIR}/00_common_commands.md" # Showcase the most commonly used commands
+alias kkk="subl ${PRODUCTIVITY_SCRIPTS_DIR}/00_common_commands.md" # Edit the most commonly used commands
 
 # # Function to call custom productivity scripts
 # mm 
@@ -375,3 +379,6 @@ export PATH="/Users/abhinavjain/.antigravity/antigravity/bin:$PATH"
 
 # Amp CLI
 export PATH="/Users/abhinavjain/.amp/bin:$PATH"
+
+# Needed for Graphiti. See how to initiatise with a database name later in python 
+export DEFAULT_DATABASE=neo4j 
