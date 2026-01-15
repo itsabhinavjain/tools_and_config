@@ -36,3 +36,9 @@ langchain-community
 langchain-anthropic
 langchain-cli
 tavily-python
+
+requests 
+python-slugify
+
+rich 
+typer

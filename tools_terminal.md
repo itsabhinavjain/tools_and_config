@@ -2,14 +2,24 @@
 - zsh
 - bash 
 - neovim
+
 - yazi
+- ripgrep
+- fzf
+- fc
+- tree
+
 - gemini-cli
 - claude-code-cli
 - open-code-cli
 - ffmpeg  
-- ripgrep, fzf, fc
-- jq 
 
+- jq
+- bat  
+
+- homebrew
+- tmux
+- rsync
 
 ## Javascript executables 
 `npx `
