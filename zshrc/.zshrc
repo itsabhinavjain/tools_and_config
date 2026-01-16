@@ -153,34 +153,11 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/abhinavjain/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/abhinavjain/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/abhinavjain/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/abhinavjain/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# Initialize CONDACONFIGDIR if a Conda environment is already activated
-if command -v conda >/dev/null 2>&1 && [ -n "$CONDA_DEFAULT_ENV" ]; then
-    CONDACONFIGDIR=$(conda info --base)/envs/$(basename "$CONDA_DEFAULT_ENV")
-fi
-
 
 ##### USER PREFERENCES #####
 export WORKSPACE_DIR="/Users/abhinavjain/Documents/02-Workspace-Common"
 export PRODUCTIVITY_SCRIPTS_DIR="/Users/abhinavjain/Documents/21-Productivity-Scripts"
 export LOCAL_SECRETS_DIR="/Users/abhinavjain/Documents/22-Environment-and-Secrets/local"
-export LOCAL_SECRETS_FILE=".env.local"
-
-export CURRENT_TIMESTAMP=$(date +"%Y-%m-%d_%H-%M") # Generate timestamp
 
 ## Aliases 
 ### For common folders, commands, servers, shorcuts, scripts etc 
@@ -212,6 +189,8 @@ ee() {
     return 1
   fi
 
+  local ORIGINAL_DIR="$PWD"
+
   # Change the directory to the PRODUCTIVITY_SCRIPTS_DIR folder. This is where all the scripts are run from. 
   cd "$LOCAL_SECRETS_DIR" || { echo "Failed to change directory to $LOCAL_SECRETS_DIR"; return 1; }
   
@@ -231,18 +210,18 @@ ee() {
 
   case $confirm in
     y|Y|yes|YES|"")
-      echo "Runnning : $script"
+        echo "Running: $script"
 
-      # Run in the current shell 
-      source ./"$script" 
-      
-      cd - 
-      ;;
+        # Run in the current shell 
+        source ./"$script" 
+
+        ;;
     *)
-      echo "Script execution aborted."
-      cd - 
-      ;;
+        echo "Script execution aborted."
+        ;;
   esac
+
+  cd "$ORIGINAL_DIR"
 }
 
 
@@ -267,6 +246,8 @@ mm() {
     return 1
   fi
 
+  local ORIGINAL_DIR="$PWD"
+
   # Change the directory to the PRODUCTIVITY_SCRIPTS_DIR folder. This is where all the scripts are run from. 
   cd "$PRODUCTIVITY_SCRIPTS_DIR" || { echo "Failed to change directory to $PRODUCTIVITY_SCRIPTS_DIR"; return 1; }
   
@@ -286,19 +267,19 @@ mm() {
 
   case $confirm in
     y|Y|yes|YES|"")
-      echo "Runnning : $script"
+        echo "Running: $script"
 
-      # Run in a child shell 
-      chmod +x "$script"
-      ./"$script" 
-      
-      cd - 
-      ;;
+        # Run the script
+        chmod +x "$script"
+        ./"$script"
+
+        ;;
     *)
-      echo "Script execution aborted."
-      cd - 
-      ;;
+        echo "Script execution aborted."
+        ;;
   esac
+
+  cd "$ORIGINAL_DIR"
 }
 
 
@@ -480,9 +461,6 @@ fpath+=~/.zfunc
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
-
-# Deactivate the default conda environment 
-conda deactivate
 
 # AWS ClI related 
 export AWS_PAGER=""
