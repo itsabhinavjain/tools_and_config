@@ -1,13 +1,20 @@
 pydantic
+pydantic-settings
 tzdata
 pytz
+
+asyncio
 
 watchfiles
 websockets
 python-dotenv
 pathlib
 PyYAML
+
+httpx
 requests
+beautifulsoup4
+playwright
 
 urllib3
 
@@ -35,8 +42,17 @@ googleads
 googleapis-common-protos
 gspread
 
-pandas
 ipykernel
+pandas
+numpy
+polars
+scikit-learn
+torch 
+tensorflow 
+transformers
+seaborn 
+plotly
+altair
 
 Jinja2
 
